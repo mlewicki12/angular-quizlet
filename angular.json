@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "quizlet"
+  "defaultProject": "quizlet",
+  "cli": {
+    "analytics": false
+  }
 }
