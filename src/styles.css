@@ -9,3 +9,17 @@ body {
 
   font-family: 'Courier New', sans-serif;
 }
+
+app-quiz {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+app-question {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}

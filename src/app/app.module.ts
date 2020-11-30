@@ -5,12 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
 import { TimerComponent } from './timer/timer.component';
+import { QuizComponent } from './quiz/quiz.component';
+
+import { FormatTime } from './format-time.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionComponent,
-    TimerComponent
+    TimerComponent,
+    QuizComponent,
+    FormatTime
   ],
   imports: [
     BrowserModule,

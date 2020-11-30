@@ -1,7 +1,7 @@
 
 <div>
   <h1>{{question.first}} * {{question.second}} = </h1>
-  <input type="text" (keyup.enter)="submit()" [(ngModel)]="answer"/>
+  <input type="text" (keyup.enter)="submit()" [(ngModel)]="answer" disabled="{{!active}}"/>
 </div>
 
 <div *ngIf="lastSolution" class="answer {{lastSolution.correct ? 'correct' : 'wrong'}}">
