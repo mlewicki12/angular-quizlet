@@ -1,3 +1,7 @@
 
-<app-header [name]="student.name" [score]="score" [time]="time" [type]="'quiz'"></app-header>
-<app-question [active]="active" [(score)]="score"></app-question>
+<app-header [name]="name" [score]="score" [time]="time" [type]="'quiz'"></app-header>
+<app-question *ngIf="active" [active]="active" [(score)]="score"></app-question>
+<div *ngIf="!started" class="main input">
+  <input type="text" [(ngModel)]="name" />
+  <button (click)="submitName()">Start</button>
+</div>

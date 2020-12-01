@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ScoreService } from '../score.service';
 import { Score } from '../types/score';
 import { Student } from '../types/student';
 
@@ -10,33 +11,32 @@ import { Student } from '../types/student';
 })
 export class QuizComponent implements OnInit {
   time: number;
+  started: boolean;
   active: boolean;
   interval: any;
 
+  name: string;
   quiz_id: string;
   score: Score = {
     total: 0,
     correct: 0
   };
 
-  student: Student = {
-    name: 'Test Student',
-    id: 11,
-    quiz_id: '5AH9E',
-    score: {
-      total: 0,
-      correct: 0
-    }
-  };
+  student: Student;
 
-  constructor(private activatedRoute: ActivatedRoute) { 
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.quiz_id = params['id'];
-    });
+  constructor(private activatedRoute: ActivatedRoute, 
+              private scoreService: ScoreService) { 
+    this.time = 10;
+    this.started = false;
+    this.active = false;
   }
 
   ngOnInit(): void {
-    this.time = 10;
+  }
+
+  submitName() {
+    this.quiz_id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.started = true;
     this.active = true;
 
     this.interval = setInterval(() => {
@@ -44,8 +44,13 @@ export class QuizComponent implements OnInit {
       if(this.time <= 0) {
         clearInterval(this.interval);
         this.active = false;
+
+        this.scoreService.submitScore({
+          name: this.name,
+          quiz_id: this.quiz_id,
+          score: this.score
+        });
       }
     }, 1000);
   }
-
 }

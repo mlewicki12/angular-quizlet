@@ -1,6 +1,6 @@
 
 <div class="header">
-  <div class="name">{{name}}</div>
+  <div class="name"><span *ngIf="!name">a</span>{{name}}</div>
   <div *ngIf="type === 'quiz'" class="score-display">
     <div class="score correct">{{score.correct}}</div>
     <div class="score wrong">{{score.total - score.correct}}</div>

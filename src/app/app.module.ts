@@ -10,12 +10,12 @@ import { TimerComponent } from './timer/timer.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthButtonComponent } from './auth-button/auth-button.component';
+import { AccountComponent } from './account/account.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { FormatTime } from './format-time.pipe';
 
 import Auth0Info from '../../loginconfig.json';
-import { AccountComponent } from './account/account.component';
-import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { CallbackComponent } from './callback/callback.component';
     HeaderComponent,
     AuthButtonComponent,
     AccountComponent,
-    CallbackComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

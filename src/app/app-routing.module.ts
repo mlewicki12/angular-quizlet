@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './account/account.component';
-import { CallbackComponent } from './callback/callback.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizComponent } from './quiz/quiz.component';
 
 const routes: Routes = [
-  {path: 'quiz', component: QuizComponent},
+  {path: 'quiz/:id', component: QuizComponent},
   {path: 'account', component: AccountComponent},
-  {path: '', component: CallbackComponent}
+  {path: '', component: DashboardComponent}
 ]
 
 @NgModule({
