@@ -1,13 +1,10 @@
 
-<div *ngIf="active">
-  <h1>{{question.first}} * {{question.second}} = </h1>
-  <input type="text" (keyup.enter)="submit()" [(ngModel)]="answer" disabled="{{!active}}"/>
+<div class="main">
+  <h1 *ngIf="!active">done</h1>
+  <h1 *ngIf="active">{{question.first}} * {{question.second}} = </h1>
+  <input *ngIf="active" type="text" (keyup.enter)="submit()" [(ngModel)]="answer" />
 </div>
 
-<div *ngIf="active == false">
-  <h1>done</h1>
-</div>
-
-<div *ngIf="lastSolution" class="answer {{lastSolution.correct ? 'correct' : 'wrong'}}">
+<div *ngIf="active && lastSolution" class="answer {{lastSolution.correct ? 'correct' : 'wrong'}}">
   <h1>{{lastSolution.question.first}} * {{lastSolution.question.second}} = {{lastSolution.question.solution}}</h1>
 </div>

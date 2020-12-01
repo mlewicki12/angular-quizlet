@@ -1,7 +1,3 @@
 
-<div class="timer">
-  <div class="score correct">{{correct}}</div>
-  <div class="score wrong">{{total - correct}}</div>
-  <app-timer [time]="time"></app-timer>
-</div>
+<app-header [time]="time" [type]="quiz"></app-header>
 <app-question [active]="active" [(total)]="total" [(correct)]="correct"></app-question>

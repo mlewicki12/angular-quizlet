@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderType } from '../headertype';
 
 @Component({
   selector: 'app-quiz',

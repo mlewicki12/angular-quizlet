@@ -8,6 +8,8 @@ import { TimerComponent } from './timer/timer.component';
 import { QuizComponent } from './quiz/quiz.component';
 
 import { FormatTime } from './format-time.pipe';
+import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -15,11 +17,13 @@ import { FormatTime } from './format-time.pipe';
     QuestionComponent,
     TimerComponent,
     QuizComponent,
-    FormatTime
+    FormatTime,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
