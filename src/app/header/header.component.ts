@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HeaderType } from '../headertype';
-import { Student } from '../student';
+import { Student } from '../types/student';
 
 @Component({
   selector: 'app-header',

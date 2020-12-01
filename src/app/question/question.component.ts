@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Question } from '../question';
+import { Question } from '../types/question';
 import { QuestionService } from '../question.service';
-import { Solution } from '../solution';
+import { Solution } from '../types/solution';
 
 @Component({
   selector: 'app-question',
