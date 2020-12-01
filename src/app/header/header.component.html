@@ -1,0 +1,9 @@
+
+<div class="header">
+  <div class="name">{{student.name}}</div>
+  <div *ngIf="type === quiz" class="score-display">
+    <div class="score correct">{{student.score.correct}}</div>
+    <div class="score wrong">{{student.score.total - student.score.correct}}</div>
+    <app-timer [time]="time"></app-timer>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HeaderType } from '../headertype';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quiz',
@@ -13,11 +13,16 @@ export class QuizComponent implements OnInit {
 
   total: number;
   correct: number;
+  quiz_id: string;
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { 
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.quiz_id = params['id'];
+    });
+  }
 
   ngOnInit(): void {
-    this.time = 180;
+    this.time = 10;
     this.active = true;
 
     this.total = 0;
