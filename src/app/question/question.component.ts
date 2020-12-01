@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Question } from '../types/question';
 import { QuestionService } from '../question.service';
 import { Solution } from '../types/solution';
+import { Score } from '../types/score';
 
 @Component({
   selector: 'app-question',
@@ -15,32 +16,27 @@ export class QuestionComponent implements OnInit {
   answer: string;
   @Input() active: boolean;
 
-  @Input() correct: number;
-  @Output() correctChange = new EventEmitter<number>();
-
-  @Input() total: number;
-  @Output() totalChange = new EventEmitter<number>();
+  @Input() score: Score;
+  @Output() scoreChange = new EventEmitter<Score>();
 
   constructor(private questionService: QuestionService) { }
 
   ngOnInit(): void {
     this.questionService.getQuestion().subscribe(que => this.question = que);
-    this.correct = 0;
-    this.total = 0;
   }
 
   submit() {
     if(!this.active) return;
 
-    this.total++;
-    this.totalChange.emit(this.total);
+    this.score.total++;
 
     var correct = false;
     if(parseInt(this.answer) === this.question.solution) {
       correct = true;
-      this.correct++;
-      this.correctChange.emit(this.correct);
+      this.score.correct++;
     }
+
+    this.scoreChange.emit(this.score);
 
     this.answer = "";
     this.lastSolution = {

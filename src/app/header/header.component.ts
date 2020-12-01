@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HeaderType } from '../headertype';
+import { Score } from '../types/score';
 import { Student } from '../types/student';
 
 @Component({
@@ -8,18 +8,11 @@ import { Student } from '../types/student';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  student: Student = {
-    name: 'Test Student',
-    id: 11,
-    quiz_id: '5AH9E',
-    score: {
-      total: 0,
-      correct: 0
-    }
-  };
+  @Input() score: Score;
+  @Input() name: string;
 
-  @Input() type: HeaderType;
   @Input() time: number;
+  @Input() type: string;
 
   constructor() { }
 
