@@ -1,15 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from '@auth0/auth0-angular';
 
 import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
 import { TimerComponent } from './timer/timer.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { HeaderComponent } from './header/header.component';
+import { AuthButtonComponent } from './auth-button/auth-button.component';
 
 import { FormatTime } from './format-time.pipe';
-import { AppRoutingModule } from './app-routing.module';
-import { HeaderComponent } from './header/header.component';
+
+import Auth0Info from '../../loginconfig.json';
+import { AccountComponent } from './account/account.component';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +24,20 @@ import { HeaderComponent } from './header/header.component';
     TimerComponent,
     QuizComponent,
     FormatTime,
-    HeaderComponent
+    HeaderComponent,
+    AuthButtonComponent,
+    AccountComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+
+    AuthModule.forRoot({
+      domain: Auth0Info.domain,
+      clientId: Auth0Info.clientId
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
