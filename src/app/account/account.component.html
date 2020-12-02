@@ -1,6 +1,16 @@
 
-<app-auth-button></app-auth-button>
-<ul *ngIf="authService.user$ | async as user">
-  <li>{{user.name}}</li>
-  <li>{{user.email}}</li>
-</ul>
+<div class="main">
+  <app-auth-button *ngIf="!(authService.isAuthenticated$ | async)"></app-auth-button>
+  <ul *ngIf="authService.user$ | async as user">
+    <li>{{user.name}}</li>
+    <li>{{user.email}}</li>
+  </ul>
+</div>
+
+<div *ngFor="let quiz of quizzes" class="quiz">
+  <p>{{quiz.name}} - {{quiz.id}}</p>
+  <p>total: {{quiz.correct}}/{{quiz.total}}</p>
+  <div *ngFor="let result of quiz.results">
+    <p>{{result.name}}: {{result.score.correct}}/{{result.score.total}}</p>
+  </div>
+</div>

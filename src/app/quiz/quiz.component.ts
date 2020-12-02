@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ScoreService } from '../score.service';
+import { QuizService } from '../quiz.service';
 import { Score } from '../types/score';
 import { Student } from '../types/student';
 
@@ -25,7 +25,7 @@ export class QuizComponent implements OnInit {
   student: Student;
 
   constructor(private activatedRoute: ActivatedRoute, 
-              private scoreService: ScoreService) { 
+              private quizService: QuizService) { 
     this.time = 10;
     this.started = false;
     this.active = false;
@@ -45,7 +45,7 @@ export class QuizComponent implements OnInit {
         clearInterval(this.interval);
         this.active = false;
 
-        this.scoreService.submitScore({
+        this.quizService.saveScore({
           name: this.name,
           quiz_id: this.quiz_id,
           score: this.score

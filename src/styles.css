@@ -33,7 +33,7 @@ app-header {
   width: 100%;
 }
 
-app-question {
+app-question, app-account {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

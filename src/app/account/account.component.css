@@ -1,0 +1,9 @@
+
+.quiz {
+  width: 75%;
+  background-color: white;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
