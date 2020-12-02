@@ -9,7 +9,7 @@ import { Quiz } from '../types/quiz';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  private quizzes: Quiz[];
+  quizzes: Quiz[];
 
   constructor(public authService: AuthService,
               private quizService: QuizService) { }

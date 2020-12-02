@@ -11,8 +11,8 @@ export class QuizService {
     {
       name: '5A',
       id: '5EHF6',
-      total: 11,
-      correct: 8,
+      total: 15,
+      correct: 12,
       results: [
         {
           name: 'skylar',
@@ -55,12 +55,15 @@ export class QuizService {
 
   constructor() { }
 
-  newQuiz(): Observable<Quiz> {
+  newQuiz(name: string): Observable<Quiz> {
     const quiz_id = this.randomString(5);
     console.log(`generating new quiz, id:${quiz_id}`);
 
     return of({
       id: quiz_id,
+      name: name,
+      total: 0,
+      correct: 0,
       results: []
     });
   }
