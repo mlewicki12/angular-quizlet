@@ -12,7 +12,7 @@ import { Score } from '../types/score';
 
 export class QuestionComponent implements OnInit {
   question: Question;
-  lastSolution: Solution;
+  lastSolutions: Solution[];
   answer: string;
   @Input() active: boolean;
 
@@ -23,6 +23,7 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.questionService.getQuestion().subscribe(que => this.question = que);
+    this.lastSolutions = [];
   }
 
   submit() {
@@ -39,10 +40,14 @@ export class QuestionComponent implements OnInit {
     this.scoreChange.emit(this.score);
 
     this.answer = "";
-    this.lastSolution = {
+    this.lastSolutions.unshift({
       question: this.question,
       correct: correct
-    };
+    });
+
+    if(this.lastSolutions.length > 5) {
+      this.lastSolutions.pop();
+    }
 
     this.questionService.getQuestion().subscribe(que => this.question = que);
   }

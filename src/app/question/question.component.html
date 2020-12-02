@@ -5,6 +5,6 @@
   <input *ngIf="active" type="text" (keyup.enter)="submit()" [(ngModel)]="answer" />
 </div>
 
-<div *ngIf="active && lastSolution" class="answer {{lastSolution.correct ? 'correct' : 'wrong'}}">
-  <h1>{{lastSolution.question.first}} * {{lastSolution.question.second}} = {{lastSolution.question.solution}}</h1>
+<div *ngFor="let solution of lastSolutions" class="answer {{solution.correct ? 'correct' : 'wrong'}}">
+  <h1>{{solution.question.first}} * {{solution.question.second}} = {{solution.question.solution}}</h1>
 </div>

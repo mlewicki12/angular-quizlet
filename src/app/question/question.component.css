@@ -25,6 +25,7 @@ input {
   flex-flow: row nowrap;
   justify-content: center;
   
+  margin: 0.5rem;
   padding: 0.5rem;
 }
 
