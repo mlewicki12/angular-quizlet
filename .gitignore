@@ -47,3 +47,6 @@ Thumbs.db
 
 # auth0 information file
 loginconfig.json
+
+# environment files with firebase info
+/src/environments
