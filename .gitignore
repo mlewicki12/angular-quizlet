@@ -50,3 +50,7 @@ loginconfig.json
 
 # environment files with firebase info
 /src/environments
+
+# firebase stuff
+/.firebase
+.firebaserc

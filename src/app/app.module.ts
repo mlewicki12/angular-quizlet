@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from '@auth0/auth0-angular';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
@@ -16,6 +18,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormatTime } from './format-time.pipe';
 
 import Auth0Info from '../../loginconfig.json';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import Auth0Info from '../../loginconfig.json';
     AuthModule.forRoot({
       domain: Auth0Info.domain,
       clientId: Auth0Info.clientId
-    })
+    }),
+
+    AngularFireModule.initializeApp(environment.firebase, 'multi-tables-quizlet'),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
