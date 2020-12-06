@@ -8,9 +8,9 @@
 </div>
 
 <div *ngFor="let quiz of quizzes" class="quiz">
-  <p>{{quiz.name}} - {{quiz.id}}</p>
-  <p>total: {{quiz.correct}}/{{quiz.total}}</p>
-  <div *ngFor="let result of quiz.results">
+  <p>{{quiz.data.name}} - {{quiz.id}}</p>
+  <p>total: {{quiz.data.correct}}/{{quiz.data.total}}</p>
+  <div *ngFor="let result of quiz.data.results">
     <p>{{result.name}}: {{result.score.correct}}/{{result.score.total}}</p>
   </div>
 </div>

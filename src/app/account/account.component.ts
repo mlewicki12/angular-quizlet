@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { QuizService } from '../quiz.service';
+import { QuizService } from '../services/quiz.service';
 import { Quiz } from '../types/quiz';
 
 @Component({

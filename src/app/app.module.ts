@@ -10,12 +10,13 @@ import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
 import { TimerComponent } from './timer/timer.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { FormatTime } from './format-time.pipe';
 import { HeaderComponent } from './header/header.component';
 import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { AccountComponent } from './account/account.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { FormatTime } from './format-time.pipe';
+import { QuizService } from './services/quiz.service';
 
 import Auth0Info from '../../loginconfig.json';
 import { environment } from 'src/environments/environment';
@@ -45,7 +46,7 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebase, 'multi-tables-quizlet'),
     AngularFirestoreModule
   ],
-  providers: [],
+  providers: [QuizService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
