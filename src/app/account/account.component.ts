@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { QuizService } from '../services/quiz.service';
 import { Quiz } from '../types/quiz';
@@ -18,4 +18,7 @@ export class AccountComponent implements OnInit {
     this.quizService.getQuizzes().subscribe(val => this.quizzes = val);
   }
 
+  expand(id: string, visible: boolean): void {
+    this.quizzes.find(val => val.id === id).visible = !visible;
+  }
 }
