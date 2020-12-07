@@ -1,17 +1,23 @@
 
 <div class="main">
   <app-auth-button *ngIf="!(authService.isAuthenticated$ | async)"></app-auth-button>
-  <ul *ngIf="authService.user$ | async as user">
-    <li>{{user.name}}</li>
-    <li>{{user.email}}</li>
-  </ul>
+  <div class="account" *ngIf="authService.user$ | async as user">
+    <div *ngIf="authService.user$ | async as user">
+      <p>{{user.name}}</p>
+      <p>{{user.email}}</p>
+    </div>
+    <div>
+      <input type="text" [(ngModel)]="quizName" />
+      <button class="add" (click)="addQuiz()">+</button>
+    </div>
+  </div>
 </div>
 
-<div *ngFor="let quiz of quizzes" class="quiz-view" (click)="expand(quiz.id, quiz.visible)">
-  <div class="quiz">
+<div *ngFor="let quiz of quizzes" class="quiz-view">
+  <div class="quiz" (click)="expand(quiz.id, quiz.visible)">
     <div class="info">
       <p>{{quiz.data.name}}</p>
-      <p>{{quiz.id}}</p>
+      <p>{{quiz.data.id}}</p>
     </div>
     <div class="scores">
       <p>{{quiz.data.correct}}/{{quiz.data.total}}</p>

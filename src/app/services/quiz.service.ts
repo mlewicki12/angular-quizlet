@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { Quiz } from '../types/quiz';
@@ -26,22 +26,20 @@ export class QuizService {
     this.quizzesStore = firestore.collection('quizzes');
   }
 
-  newQuiz(name: string): Promise<Quiz> {
+  newQuiz(name: string): Promise<DocumentReference<Quiz>> {
     const quiz_id = this.randomString(5);
     console.log(`generating new quiz, id:${quiz_id}`);
 
     const quiz = {
       id: quiz_id,
-      data: {
-        name: name,
-        total: 0,
-        correct: 0,
-        results: []
-      }
+      name: name,
+      total: 0,
+      correct: 0,
+      results: []
     };
 
-    return new Promise<Quiz>((resolve, reject) => {
-      this.quizzesStore.add(quiz).then(res => resolve(quiz), err => reject(err))
+    return new Promise<DocumentReference<Quiz>>((resolve, reject) => {
+      this.quizzesStore.add(quiz).then(res => resolve(res), err => reject(err))
     });
   }
 

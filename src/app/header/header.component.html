@@ -1,9 +1,18 @@
 
-<div class="header">
-  <div class="name"><span *ngIf="!name">a</span>{{name}}</div>
-  <div *ngIf="type === 'quiz'" class="score-display">
+<div class="header" *ngIf="type === 'quiz'">
+  <div class="name">
+    <span *ngIf="!name">a</span>
+    {{name}}
+  </div>
+  <div class="score-display">
     <div class="score correct">{{score.correct}}</div>
     <div class="score wrong">{{score.total - score.correct}}</div>
     <app-timer [time]="time"></app-timer>
+  </div>
+</div>
+
+<div class="header" *ngIf="type === 'login'">
+  <div class="name" *ngIf="type === 'login'">
+    <app-auth-button></app-auth-button>
   </div>
 </div>

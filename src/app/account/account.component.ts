@@ -11,6 +11,7 @@ import { Quiz } from '../types/quiz';
 })
 export class AccountComponent implements OnInit {
   quizzes: Quiz[];
+  quizName: string;
 
   constructor(public authService: AuthService,
               private quizService: QuizService,
@@ -18,7 +19,6 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.quizService.getQuizzes().subscribe(val => this.quizzes = val);
-    console.log(this.router.url);
     console.log(window.location.href);
   }
 
@@ -27,5 +27,9 @@ export class AccountComponent implements OnInit {
     if(quiz.data.results.length > 0) {
       this.quizzes.find(val => val.id === id).visible = !visible;
     }
+  }
+
+  addQuiz(): void {
+    this.quizService.newQuiz(this.quizName);
   }
 }

@@ -1,7 +1,32 @@
 
+.account {
+  width: 100%;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input {
+  margin: 0.5rem;
+  padding: 0.5rem;
+
+  border: 0;
+  border-bottom: 1px solid black;
+}
+
+.add {
+  cursor: pointer;
+  background-color: #3ae374;
+  border: 1px solid black;
+
+  height: 25%;
+}
+
 .quiz-view {
   width: 100%;
-  cursor: pointer;
+  margin: 0.5rem;
 
   display: flex;
   flex-flow: column nowrap;
@@ -15,6 +40,8 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+
+  cursor: pointer;
 
   padding: 1rem;
   margin-bottom: 0;
