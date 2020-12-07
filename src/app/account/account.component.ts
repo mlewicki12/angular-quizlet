@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { QuizService } from '../services/quiz.service';
 import { Quiz } from '../types/quiz';
@@ -12,13 +13,19 @@ export class AccountComponent implements OnInit {
   quizzes: Quiz[];
 
   constructor(public authService: AuthService,
-              private quizService: QuizService) { }
+              private quizService: QuizService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.quizService.getQuizzes().subscribe(val => this.quizzes = val);
+    console.log(this.router.url);
+    console.log(window.location.href);
   }
 
   expand(id: string, visible: boolean): void {
-    this.quizzes.find(val => val.id === id).visible = !visible;
+    var quiz = this.quizzes.find(val => val.id === id);
+    if(quiz.data.results.length > 0) {
+      this.quizzes.find(val => val.id === id).visible = !visible;
+    }
   }
 }

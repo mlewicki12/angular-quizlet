@@ -26,16 +26,22 @@ export class QuizService {
     this.quizzesStore = firestore.collection('quizzes');
   }
 
-  newQuiz(name: string): Observable<Quiz> {
+  newQuiz(name: string): Promise<Quiz> {
     const quiz_id = this.randomString(5);
     console.log(`generating new quiz, id:${quiz_id}`);
 
-    return of({
+    const quiz = {
       id: quiz_id,
-      name: name,
-      total: 0,
-      correct: 0,
-      results: []
+      data: {
+        name: name,
+        total: 0,
+        correct: 0,
+        results: []
+      }
+    };
+
+    return new Promise<Quiz>((resolve, reject) => {
+      this.quizzesStore.add(quiz).then(res => resolve(quiz), err => reject(err))
     });
   }
 
