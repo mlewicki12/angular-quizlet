@@ -6,6 +6,11 @@ export interface Quiz {
   id: string;
   total: number;
   correct: number;
+  user: string;
   results: Student[];
-  data?: any;
+}
+
+export interface QuizDb {
+  id: string;
+  data: Quiz;
 }

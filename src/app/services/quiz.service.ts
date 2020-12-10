@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
-import { Quiz } from '../types/quiz';
+import { tap, map, filter } from 'rxjs/operators';
+import { Quiz, QuizDb } from '../types/quiz';
 import { Student } from '../types/student';
 
 @Injectable({
@@ -26,12 +26,13 @@ export class QuizService {
     this.quizzesStore = firestore.collection('quizzes');
   }
 
-  newQuiz(name: string): Promise<DocumentReference<Quiz>> {
+  newQuiz(name: string, id: string): Promise<DocumentReference<Quiz>> {
     const quiz_id = this.randomString(5);
     console.log(`generating new quiz, id:${quiz_id}`);
 
     const quiz = {
       id: quiz_id,
+      user: id,
       name: name,
       total: 0,
       correct: 0,
@@ -43,15 +44,14 @@ export class QuizService {
     });
   }
 
-  getQuizzes(): Observable<Quiz[]> {
+  getQuizzes(id: string): Observable<QuizDb[]> {
     return this.quizzesStore.snapshotChanges().pipe(
-      tap(console.log),
       map(actions => actions.map(a => {
         const data = a.payload.doc.data();
         const id = a.payload.doc.id;
         return { id, data };
       })),
-      tap(console.log)
+      map(val => val.filter(obj => obj.data.user === id))
     );
   }
 

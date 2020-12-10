@@ -8,6 +8,16 @@
   align-items: center;
 }
 
+.profile {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-end;
+}
+
+.profile > div {
+  padding-left: 0.5rem;
+}
+
 input {
   margin: 0.5rem;
   padding: 0.5rem;

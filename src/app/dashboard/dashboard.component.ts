@@ -11,7 +11,9 @@ export class DashboardComponent implements OnInit {
   code: string;
   state: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
+              private router: Router) {
     this.activatedRoute.queryParams.subscribe(params => {
       this.code = params['code'];
       this.state = params['state'];
