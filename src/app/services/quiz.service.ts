@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from 
 import { Observable, of } from 'rxjs';
 import { tap, map, filter } from 'rxjs/operators';
 import { Quiz, QuizDb } from '../types/quiz';
+import { Score } from '../types/score';
 import { Student } from '../types/student';
 
 @Injectable({
@@ -20,10 +21,12 @@ export class QuizService {
   }
 
   private quizzesStore: AngularFirestoreCollection<Quiz>;
+  private scoresStore: AngularFirestoreCollection<Student>;
   quizzes: Quiz[];
 
   constructor(firestore: AngularFirestore) {
     this.quizzesStore = firestore.collection('quizzes');
+    this.scoresStore = firestore.collection('scores');
   }
 
   newQuiz(name: string, id: string): Promise<DocumentReference<Quiz>> {
@@ -34,9 +37,6 @@ export class QuizService {
       id: quiz_id,
       user: id,
       name: name,
-      total: 0,
-      correct: 0,
-      results: []
     };
 
     return new Promise<DocumentReference<Quiz>>((resolve, reject) => {
@@ -56,7 +56,22 @@ export class QuizService {
   }
 
   saveScore(student: Student) {
-    console.log('saving student score (someday)');
-    console.log(student);
+    return new Promise<DocumentReference<Student>>((resolve, reject) => {
+      this.scoresStore.add(student).then(res => resolve(res), err => reject(err));
+    })
+  }
+
+  getScores(id: string) {
+    return this.scoresStore.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return { id, data };
+      })),
+      map(val => val.filter(obj => {
+        console.log(obj.data.quiz_id, id);
+        return obj.data.quiz_id === id;
+      }))
+    );
   }
 }

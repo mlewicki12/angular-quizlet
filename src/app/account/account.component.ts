@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { QuizService } from '../services/quiz.service';
 import { Quiz, QuizDb } from '../types/quiz';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-account',
@@ -27,11 +28,24 @@ export class AccountComponent implements OnInit {
     console.log(window.location.href);
   }
 
-  expand(id: string, visible: boolean): void {
-    var quiz = this.quizzes.find(val => val.id === id);
-    if(quiz.data.results.length > 0) {
-      this.quizzes.find(val => val.id === id).data.visible = !visible;
+  expand(id: string): void {
+    var quiz = this.quizzes.find(val => val.data.id === id);
+    if(!quiz.visible) {
+      if(!quiz.scores) {
+        this.quizService.getScores(quiz.data.id).pipe(
+            map(val => val.map(item => item.data)))
+          .subscribe(val => {
+            quiz.scores = val;
+            quiz.data.score = quiz.scores.reduce((total, val) => {
+              total.total += val.score.total;
+              total.correct += val.score.correct;
+              return total;},
+              {total: 0, correct: 0});
+        });
+      }
     }
+
+    quiz.visible = !quiz.visible;
   }
 
   addQuiz(): void {

@@ -20,7 +20,7 @@ export class QuizComponent implements OnInit {
   score: Score = {
     total: 0,
     correct: 0
-  };
+  }; 
 
   student: Student;
 

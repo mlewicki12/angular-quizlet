@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Question } from '../types/question';
-import { QuestionService } from '../question.service';
+import { QuestionService } from '../services/question.service';
 import { Solution } from '../types/solution';
 import { Score } from '../types/score';
 

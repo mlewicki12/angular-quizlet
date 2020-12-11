@@ -17,17 +17,17 @@
 </div>
 
 <div *ngFor="let quiz of quizzes" class="quiz-view">
-  <div class="quiz" (click)="expand(quiz.data.id, quiz.data.visible)">
+  <div class="quiz" (click)="expand(quiz.data.id)">
     <div class="info">
       <p>{{quiz.data.name}}</p>
       <p>{{quiz.data.id}}</p>
     </div>
-    <div class="scores">
-      <p>{{quiz.data.correct}}/{{quiz.data.total}}</p>
+    <div class="scores" *ngIf="quiz.visible">
+      <p>{{quiz.data.score.correct}}/{{quiz.data.score.total}}</p>
     </div>
   </div>
   <div *ngIf="quiz.visible" class="score-info">
-    <div *ngFor="let student of quiz.data.results">
+    <div *ngFor="let student of quiz.scores">
       <p class="name">{{student.name}}</p>
       <p>{{student.score.correct}}/{{student.score.total}}</p>
     </div>
