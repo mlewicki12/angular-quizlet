@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
@@ -37,6 +38,7 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    ClipboardModule,
 
     AuthModule.forRoot({
       domain: Auth0Info.domain,

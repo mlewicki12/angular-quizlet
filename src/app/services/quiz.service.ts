@@ -69,7 +69,6 @@ export class QuizService {
         return { id, data };
       })),
       map(val => val.filter(obj => {
-        console.log(obj.data.quiz_id, id);
         return obj.data.quiz_id === id;
       }))
     );

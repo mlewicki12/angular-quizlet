@@ -20,9 +20,9 @@
   <div class="quiz" (click)="expand(quiz.data.id)">
     <div class="info">
       <p>{{quiz.data.name}}</p>
-      <p>{{quiz.data.id}}</p>
+      <a (click)="copyLink(quiz.link); expand(quiz.data.id)">{{quiz.data.id}}</a>
     </div>
-    <div class="scores" *ngIf="quiz.visible">
+    <div class="scores" *ngIf="quiz.data.score">
       <p>{{quiz.data.score.correct}}/{{quiz.data.score.total}}</p>
     </div>
   </div>

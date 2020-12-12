@@ -13,4 +13,5 @@ export interface QuizDb {
   data: Quiz;
   visible?: boolean;
   scores?: Student[];
+  link?: string;
 }

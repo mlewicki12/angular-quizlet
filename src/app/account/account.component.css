@@ -26,14 +26,6 @@ input {
   border-bottom: 1px solid black;
 }
 
-.add {
-  cursor: pointer;
-  background-color: #3ae374;
-  border: 1px solid black;
-
-  height: 25%;
-}
-
 .quiz-view {
   width: 100%;
   margin: 0.5rem;
@@ -55,6 +47,10 @@ input {
 
   padding: 1rem;
   margin-bottom: 0;
+}
+
+.quiz p, .quiz a {
+  cursor: text;
 }
 
 .score-info {

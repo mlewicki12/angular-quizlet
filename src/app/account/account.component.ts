@@ -4,6 +4,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { QuizService } from '../services/quiz.service';
 import { Quiz, QuizDb } from '../types/quiz';
 import { map } from 'rxjs/operators';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-account',
@@ -16,17 +17,23 @@ export class AccountComponent implements OnInit {
   quizName: string;
 
   constructor(public authService: AuthService,
-              private quizService: QuizService) { 
+              private quizService: QuizService,
+              private router: Router,
+              private clipboard: Clipboard) { 
     this.authService.user$.subscribe(user => {
       console.log(user);
       this.user = user;
-      this.quizService.getQuizzes(user.sub).subscribe(val => this.quizzes = val);
+      this.quizService.getQuizzes(user.sub).subscribe(val => {
+        val.forEach(quiz => {
+          quiz.link = window.location.origin + this.router.createUrlTree(['quiz', quiz.data.id]).toString();
+        });
+
+        this.quizzes = val
+      });
     });
   }
 
-  ngOnInit(): void {
-    console.log(window.location.href);
-  }
+  ngOnInit(): void { }
 
   expand(id: string): void {
     var quiz = this.quizzes.find(val => val.data.id === id);
@@ -48,7 +55,13 @@ export class AccountComponent implements OnInit {
     quiz.visible = !quiz.visible;
   }
 
+  copyLink(link: string) {
+    console.log('copying to clipboard: ' + link);
+    this.clipboard.copy(link);
+  }
+
   addQuiz(): void {
+    this.quizName = "";
     this.quizService.newQuiz(this.quizName, this.user.sub);
   }
 }
