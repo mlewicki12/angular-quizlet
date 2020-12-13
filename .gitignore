@@ -48,8 +48,8 @@ Thumbs.db
 # auth0 information file
 loginconfig.json
 
-# environment files with firebase info
-/src/environments
+# environment config
+/src/environments/config.ts
 
 # firebase stuff
 /.firebase

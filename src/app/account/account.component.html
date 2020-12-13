@@ -6,7 +6,6 @@
       <img src="{{user.picture}}" />
       <div>
         <p>{{user.name}}</p>
-        <p>{{user.email}}</p>
       </div>
     </div>
     <div>
@@ -19,11 +18,11 @@
 <div *ngFor="let quiz of quizzes" class="quiz-view">
   <div class="quiz" (click)="expand(quiz.data.id)">
     <div class="info">
-      <p>{{quiz.data.name}}</p>
-      <a (click)="copyLink(quiz.link); expand(quiz.data.id)">{{quiz.data.id}}</a>
+      <a (click)="copyLink(quiz.link); expand(quiz.data.id)">{{quiz.data.name && quiz.data.name + ' - '}}{{quiz.data.id}}</a>
     </div>
-    <div class="scores" *ngIf="quiz.data.score">
-      <p>{{quiz.data.score.correct}}/{{quiz.data.score.total}}</p>
+    <div class="scores">
+      <p *ngIf="quiz.data.score">{{quiz.data.score.correct}}/{{quiz.data.score.total}}</p>
+      <p *ngIf="!quiz.data.score">0/0</p>
     </div>
   </div>
   <div *ngIf="quiz.visible" class="score-info">

@@ -19,7 +19,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { QuizService } from './services/quiz.service';
 
-import Auth0Info from '../../loginconfig.json';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -41,8 +40,8 @@ import { environment } from 'src/environments/environment';
     ClipboardModule,
 
     AuthModule.forRoot({
-      domain: Auth0Info.domain,
-      clientId: Auth0Info.clientId
+      domain: environment.auth.domain,
+      clientId: environment.auth.clientId
     }),
 
     AngularFireModule.initializeApp(environment.firebase, 'multi-tables-quizlet'),

@@ -73,6 +73,10 @@ input {
   flex-basis: 20%;
 }
 
+.scores > p {
+  margin: 0;
+}
+
 .name {
   margin-bottom: 0.5rem;
 }

@@ -37,6 +37,7 @@ export class AccountComponent implements OnInit {
 
   expand(id: string): void {
     var quiz = this.quizzes.find(val => val.data.id === id);
+    console.log(quiz);
     if(!quiz.visible) {
       if(!quiz.scores) {
         this.quizService.getScores(quiz.data.id).pipe(
@@ -61,7 +62,7 @@ export class AccountComponent implements OnInit {
   }
 
   addQuiz(): void {
-    this.quizName = "";
     this.quizService.newQuiz(this.quizName, this.user.sub);
+    this.quizName = "";
   }
 }
