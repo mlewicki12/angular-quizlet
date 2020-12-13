@@ -26,7 +26,7 @@ export class QuizComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, 
               private quizService: QuizService) { 
-    this.time = 10;
+    this.time = 180;
     this.started = false;
     this.active = false;
   }

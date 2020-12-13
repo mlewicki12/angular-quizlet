@@ -54,3 +54,6 @@ loginconfig.json
 # firebase stuff
 /.firebase
 .firebaserc
+
+# build files
+/public
