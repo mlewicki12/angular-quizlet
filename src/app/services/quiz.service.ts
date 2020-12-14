@@ -5,6 +5,7 @@ import { tap, map, filter } from 'rxjs/operators';
 import { Quiz, QuizDb } from '../types/quiz';
 import { Score } from '../types/score';
 import { Student } from '../types/student';
+import { Token } from '../types/token';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +23,12 @@ export class QuizService {
 
   private quizzesStore: AngularFirestoreCollection<Quiz>;
   private scoresStore: AngularFirestoreCollection<Student>;
-  quizzes: Quiz[];
+  private tokensStore: AngularFirestoreCollection<Token>;
 
-  constructor(firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore) {
     this.quizzesStore = firestore.collection('quizzes');
     this.scoresStore = firestore.collection('scores');
+    this.tokensStore = firestore.collection('tokens');
   }
 
   newQuiz(name: string, id: string): Promise<DocumentReference<Quiz>> {
@@ -63,10 +65,28 @@ export class QuizService {
     );
   }
 
+  registerAttempt(name: string, id: string): string {
+    const token = this.randomString(10);
+    this.tokensStore.add({name: name, id: id, token: token});
+
+    return token;
+  }
+
   saveScore(student: Student) {
-    return new Promise<DocumentReference<Student>>((resolve, reject) => {
-      this.scoresStore.add(student).then(res => resolve(res), err => reject(err));
-    })
+    this.firestore.collection('tokens', ref => ref
+      .where('token', '==', student.token)
+      .where('name', '==', student.name)
+      .where('id', '==', student.quiz_id)).snapshotChanges().pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, data };
+        })),
+      ).subscribe(val => {
+        if(val.length > 0) { // we got a match
+          this.scoresStore.add(student).then(() => console.log('successfully saved score'), () => console.log('failed to save score'));
+        }
+      });
   }
 
   getScores(id: string) {

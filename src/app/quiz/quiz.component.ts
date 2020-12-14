@@ -26,7 +26,7 @@ export class QuizComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, 
               private quizService: QuizService) { 
-    this.time = 180;
+    this.time = 10;
     this.started = false;
     this.active = false;
   }
@@ -39,6 +39,7 @@ export class QuizComponent implements OnInit {
     this.started = true;
     this.active = true;
 
+    const token = this.quizService.registerAttempt(this.name, this.quiz_id);
     this.interval = setInterval(() => {
       this.time--;
       if(this.time <= 0) {
@@ -48,7 +49,8 @@ export class QuizComponent implements OnInit {
         this.quizService.saveScore({
           name: this.name,
           quiz_id: this.quiz_id,
-          score: this.score
+          score: this.score,
+          token: token
         });
       }
     }, 1000);

@@ -5,4 +5,5 @@ export interface Student {
   quiz_id: string;
   score: Score;
   id?: string;
+  token: string;
 }
