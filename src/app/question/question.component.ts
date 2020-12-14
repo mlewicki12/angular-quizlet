@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Question } from '../types/question';
 import { QuestionService } from '../services/question.service';
 import { Solution } from '../types/solution';
@@ -14,10 +14,16 @@ export class QuestionComponent implements OnInit {
   question: Question;
   lastSolutions: Solution[];
   answer: string;
-  @Input() active: boolean;
 
+  @Input() active: boolean;
   @Input() score: Score;
   @Output() scoreChange = new EventEmitter<Score>();
+
+  @HostListener('window:keyup.enter') 
+  @HostListener('window:keyup.shift.enter')
+  enterEvent() {
+    this.submit();
+  }
 
   constructor(private questionService: QuestionService) { }
 

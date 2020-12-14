@@ -44,6 +44,14 @@ export class QuizService {
     });
   }
 
+  deleteQuiz(id: string): void {
+    this.quizzesStore.doc(id).delete().then(() => console.log(`successfully deleted quiz ${id}`), () => console.log(`couldn't delete quiz ${id}`));
+  }
+
+  deleteScore(id: string): void {
+    this.scoresStore.doc(id).delete().then(() => console.log(`successfully deleted quiz ${id}`, () => console.log(`couldn't delete quiz ${id}`)));
+  }
+
   getQuizzes(id: string): Observable<QuizDb[]> {
     return this.quizzesStore.snapshotChanges().pipe(
       map(actions => actions.map(a => {

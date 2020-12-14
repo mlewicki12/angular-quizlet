@@ -3,13 +3,14 @@
   <app-auth-button *ngIf="!this.user"></app-auth-button>
   <div class="account" *ngIf="this.user">
     <div class="profile">
-      <img src="{{user.picture}}" />
       <div>
         <p>{{user.name}}</p>
       </div>
     </div>
     <div>
-      <input type="text" [(ngModel)]="quizName" />
+      <label>add a quiz:
+        <input type="text" [(ngModel)]="quizName" />
+      </label>
       <button class="add" (click)="addQuiz()">+</button>
     </div>
   </div>
@@ -23,12 +24,14 @@
     <div class="scores">
       <p *ngIf="quiz.data.score">{{quiz.data.score.correct}}/{{quiz.data.score.total}}</p>
       <p *ngIf="!quiz.data.score">0/0</p>
+      <button class="add" (click)="expand(quiz.data.id); deleteQuiz(quiz.id);">x</button>
     </div>
   </div>
   <div *ngIf="quiz.visible" class="score-info">
     <div *ngFor="let student of quiz.scores">
       <p class="name">{{student.name}}</p>
       <p>{{student.score.correct}}/{{student.score.total}}</p>
+      <button class="add" (click)="deleteScore(student)">x</button>
     </div>
   </div>
 </div>

@@ -5,6 +5,7 @@ import { QuizService } from '../services/quiz.service';
 import { Quiz, QuizDb } from '../types/quiz';
 import { map } from 'rxjs/operators';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { Student } from '../types/student';
 
 @Component({
   selector: 'app-account',
@@ -40,10 +41,11 @@ export class AccountComponent implements OnInit {
     console.log(quiz);
     if(!quiz.visible) {
       if(!quiz.scores) {
-        this.quizService.getScores(quiz.data.id).pipe(
-            map(val => val.map(item => item.data)))
-          .subscribe(val => {
-            quiz.scores = val;
+        this.quizService.getScores(quiz.data.id).subscribe(val => {
+            quiz.scores = val.map(score => {
+              score.data.id = score.id;
+              return score.data;
+            });
             quiz.data.score = quiz.scores.reduce((total, val) => {
               total.total += val.score.total;
               total.correct += val.score.correct;
@@ -64,5 +66,17 @@ export class AccountComponent implements OnInit {
   addQuiz(): void {
     this.quizService.newQuiz(this.quizName, this.user.sub);
     this.quizName = "";
+  }
+
+  deleteQuiz(id: string): void {
+    if(confirm("do you want to delete me?")) {
+      this.quizService.deleteQuiz(id);
+    }
+  }
+
+  deleteScore(student: Student) {
+    if(confirm("do you want to delete me?")) {
+      this.quizService.deleteScore(student.id);
+    }
   }
 }
