@@ -1,10 +1,12 @@
 
 <div class="main">
-  <h1 *ngIf="!active">done</h1>
+  <h1 *ngIf="!active">wysłano wynik, możesz zamknąć tę stronę</h1>
   <h1 *ngIf="active">{{question.first}} * {{question.second}} = </h1>
   <input *ngIf="active" type="text" [(ngModel)]="answer" />
 </div>
 
-<div *ngFor="let solution of lastSolutions" class="answer {{solution.correct ? 'correct' : 'wrong'}}">
-  <h1>{{solution.question.first}} * {{solution.question.second}} = {{solution.question.solution}}</h1>
+<div *ngIf="active">
+  <div *ngFor="let solution of lastSolutions" class="answer {{solution.correct ? 'correct' : 'wrong'}}">
+    <h1>{{solution.question.first}} * {{solution.question.second}} = {{solution.question.solution}}</h1>
+  </div>
 </div>

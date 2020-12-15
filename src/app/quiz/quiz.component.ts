@@ -32,7 +32,7 @@ export class QuizComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, 
               private quizService: QuizService) { 
-    this.time = 10;
+    this.time = 180;
     this.started = false;
     this.active = false;
   }
@@ -41,6 +41,8 @@ export class QuizComponent implements OnInit {
   }
 
   submitName() {
+    if(this.started) return;
+
     this.quiz_id = this.activatedRoute.snapshot.paramMap.get('id');
     this.started = true;
     this.active = true;
@@ -49,15 +51,16 @@ export class QuizComponent implements OnInit {
     this.interval = setInterval(() => {
       this.time--;
       if(this.time <= 0) {
+        console.log('chat scrolling so fast noone will see am gay');
         clearInterval(this.interval);
         this.active = false;
 
-        this.quizService.saveScore({
-          name: this.name,
-          quiz_id: this.quiz_id,
-          score: this.score,
-          token: token
-        });
+//        this.quizService.saveScore({
+//          name: this.name,
+//          quiz_id: this.quiz_id,
+//          score: this.score,
+//          token: token
+//        });
       }
     }, 1000);
   }
