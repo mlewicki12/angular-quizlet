@@ -55,12 +55,12 @@ export class QuizComponent implements OnInit {
         clearInterval(this.interval);
         this.active = false;
 
-//        this.quizService.saveScore({
-//          name: this.name,
-//          quiz_id: this.quiz_id,
-//          score: this.score,
-//          token: token
-//        });
+        this.quizService.saveScore({
+          name: this.name,
+          quiz_id: this.quiz_id,
+          score: this.score,
+          token: token
+        });
       }
     }, 1000);
   }
