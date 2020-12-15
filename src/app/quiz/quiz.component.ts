@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '../services/quiz.service';
 import { Score } from '../types/score';
@@ -23,6 +23,12 @@ export class QuizComponent implements OnInit {
   }; 
 
   student: Student;
+
+  @HostListener('window:keyup.enter') 
+  @HostListener('window:keyup.shift.enter')
+  enterEvent() {
+    this.submitName();
+  }
 
   constructor(private activatedRoute: ActivatedRoute, 
               private quizService: QuizService) { 
