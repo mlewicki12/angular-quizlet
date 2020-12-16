@@ -6,7 +6,7 @@
 </div>
 
 <div *ngIf="active">
-  <div *ngFor="let solution of lastSolutions" class="answer {{solution.correct ? 'correct' : 'wrong'}}">
-    <h1>{{solution.question.first}} * {{solution.question.second}} = {{solution.question.solution}}</h1>
+  <div *ngIf="solution" class="answer {{solution.correct ? 'correct' : 'wrong'}}">
+    <h1>{{solution.question.first}} * {{solution.question.second}} = {{solution.answer}}</h1>
   </div>
 </div>

@@ -30,6 +30,7 @@
   <div *ngIf="quiz.visible" class="score-info">
     <div *ngFor="let student of quiz.scores">
       <p class="name">{{student.name}}</p>
+      <sub>{{student.date | date:'HH:mm'}}</sub>
       <p>{{student.score.correct}}/{{student.score.total}}</p>
       <button class="add" (click)="deleteScore(student)">x</button>
     </div>

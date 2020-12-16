@@ -67,7 +67,7 @@ export class QuizService {
 
   registerAttempt(name: string, id: string): string {
     const token = this.randomString(10);
-    this.tokensStore.add({name: name, id: id, token: token});
+    this.tokensStore.add({name: name, id: id, token: token, saved: false});
 
     return token;
   }
@@ -83,8 +83,9 @@ export class QuizService {
           return { id, data };
         })),
       ).subscribe(val => {
-        if(val.length > 0) { // we got a match
+        if(val.length > 0 && !(val[0].data as Token).saved) { // we got a match and it hasn't been saved to yet
           this.scoresStore.add(student).then(() => console.log('successfully saved score'), () => console.log('failed to save score'));
+          this.firestore.collection('tokens').doc(val[0].id).update({saved: true});
         }
       });
   }
