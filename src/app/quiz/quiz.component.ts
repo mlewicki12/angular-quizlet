@@ -51,7 +51,6 @@ export class QuizComponent implements OnInit {
     this.interval = setInterval(() => {
       this.time--;
       if(this.time <= 0) {
-        console.log('chat scrolling so fast noone will see am gay');
         clearInterval(this.interval);
         this.active = false;
 
@@ -59,7 +58,8 @@ export class QuizComponent implements OnInit {
           name: this.name,
           quiz_id: this.quiz_id,
           score: this.score,
-          token: token
+          token: token,
+          date: new Date().getTime()
         });
       }
     }, 1000);

@@ -6,4 +6,5 @@ export interface Student {
   score: Score;
   id?: string;
   token: string;
+  date: number;
 }

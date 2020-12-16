@@ -20,6 +20,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizService } from './services/quiz.service';
 
 import { environment } from 'src/environments/environment';
+import { AutofocusDirective } from './AutofocusDirective';
 
 @NgModule({
   declarations: [
@@ -27,11 +28,12 @@ import { environment } from 'src/environments/environment';
     QuestionComponent,
     TimerComponent,
     QuizComponent,
-    FormatTime,
     HeaderComponent,
     AuthButtonComponent,
     AccountComponent,
-    DashboardComponent
+    DashboardComponent,
+    FormatTime,
+    AutofocusDirective
   ],
   imports: [
     BrowserModule,
