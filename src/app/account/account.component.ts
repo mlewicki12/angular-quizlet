@@ -6,6 +6,7 @@ import { Quiz, QuizDb } from '../types/quiz';
 import { map } from 'rxjs/operators';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Student } from '../types/student';
+import { Score } from '../types/score';
 
 @Component({
   selector: 'app-account',
@@ -16,6 +17,7 @@ export class AccountComponent implements OnInit {
   user: any;
   quizzes: QuizDb[];
   quizName: string;
+  displayScore: Score;
 
   constructor(public authService: AuthService,
               private quizService: QuizService,
@@ -38,14 +40,13 @@ export class AccountComponent implements OnInit {
 
   expand(id: string): void {
     var quiz = this.quizzes.find(val => val.data.id === id);
-    console.log(quiz);
     if(!quiz.visible) {
       if(!quiz.scores) {
         this.quizService.getScores(quiz.data.id).subscribe(val => {
             quiz.scores = val.map(score => {
               score.data.id = score.id;
               return score.data;
-            });
+            }).sort((a, b) => b.score.correct - a.score.correct);
             quiz.data.score = quiz.scores.reduce((total, val) => {
               total.total += val.score.total;
               total.correct += val.score.correct;
@@ -72,6 +73,30 @@ export class AccountComponent implements OnInit {
     if(confirm("do you want to delete me?")) {
       this.quizService.deleteQuiz(id);
     }
+  }
+
+  calcAvg(id: string) {
+    var quiz = this.quizzes.find(val => val.data.id === id);
+    if(quiz.scores) {
+      this.displayScore = {total: Math.floor(quiz.data.score.total / quiz.scores.length),
+                           correct: Math.floor(quiz.data.score.correct / quiz.scores.length)};
+    }
+  }
+
+  calcTen(id: string) {
+    var quiz = this.quizzes.find(val => val.data.id === id);
+    if(quiz.scores) {
+      const newArr = quiz.scores.filter(() => true).splice(0, 10);
+      const results = newArr.reduce((total, val) => {
+        total.total += val.score.total;
+        total.correct += val.score.correct;
+        return total;
+      }, {total: 0, correct: 0});
+
+      this.displayScore = {total: Math.floor(results.total / newArr.length),
+                           correct: Math.floor(results.correct / newArr.length)};
+    }
+
   }
 
   deleteScore(student: Student) {

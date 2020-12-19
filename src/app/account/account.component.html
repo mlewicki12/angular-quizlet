@@ -21,10 +21,14 @@
     <div class="info">
       <a (click)="copyLink(quiz.link); expand(quiz.data.id)">{{quiz.data.name && quiz.data.name + ' - '}}{{quiz.data.id}}</a>
     </div>
+    <div class="scores-calc">
+      <button (click)="calcAvg(quiz.data.id); expand(quiz.data.id)">Oblicz średnią</button>
+      <button (click)="calcTen(quiz.data.id); expand(quiz.data.id)">Oblicz pierwsze dziesięć</button>
+    </div>
     <div class="scores">
-      <p *ngIf="quiz.data.score">{{quiz.data.score.correct}}/{{quiz.data.score.total}}</p>
-      <p *ngIf="!quiz.data.score">0/0</p>
       <button class="add" (click)="expand(quiz.data.id); deleteQuiz(quiz.id);">x</button>
+      <p *ngIf="quiz.data.score">Suma: {{quiz.data.score.correct}}/{{quiz.data.score.total}}</p>
+      <p *ngIf="displayScore">Średnia: {{displayScore.correct}}/{{displayScore.total}}</p>
     </div>
   </div>
   <div *ngIf="quiz.visible" class="score-info">

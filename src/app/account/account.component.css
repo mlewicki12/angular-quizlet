@@ -53,6 +53,11 @@ input {
   cursor: text;
 }
 
+.scores-calc {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 .score-info {
   width: 75%;
 
@@ -73,8 +78,14 @@ input {
   flex-basis: 20%;
 }
 
-.scores > p {
+.scores {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.scores > * {
   margin: 0;
+  padding: 0.5rem;
 }
 
 .name {
